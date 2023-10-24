@@ -1,9 +1,17 @@
 import { StyleSheet, TextInput, View } from "react-native";
 
-const Input = ({ text }) => {
+const Input = ({ text, secure }) => {
   return (
     <View style={styles.inputView}>
-      <TextInput style={styles.inputStyle} placeholder={text} />
+      {secure == "secure" ? (
+        <TextInput
+          style={styles.inputStyle}
+          placeholder={text}
+          secureTextEntry="true"
+        />
+      ) : (
+        <TextInput style={styles.inputStyle} placeholder={text} />
+      )}
     </View>
   );
 };
@@ -11,12 +19,16 @@ const Input = ({ text }) => {
 export default Input;
 
 const styles = StyleSheet.create({
-  inputView: { marginTop: 20, justifyContent: "center", alignItems: "center" },
+  inputView: {
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   inputStyle: {
     width: 300,
     height: 50,
     fontSize: 18,
-    borderWidth: 1,
+    borderBottomWidth: 2,
     borderColor: "#ccc",
     padding: 10,
     borderRadius: 10,

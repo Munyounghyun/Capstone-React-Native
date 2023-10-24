@@ -61,6 +61,7 @@ export default function App() {
             headerShadowVisible: false,
           }}
         >
+          <Stack.Screen name="회원가입" component={Signup} />
           <Stack.Screen
             name="로그인"
             component={Login}
@@ -68,14 +69,14 @@ export default function App() {
               headerTitle: () => <Logo />,
             }}
           />
-          <Stack.Screen name="회원가입" component={Signup} />
+
           <Stack.Screen name="아이디 찾기" component={FindId} />
           <Stack.Screen name="비밀번호 변경" component={ChangePwd} />
           <Stack.Screen
             name="HiFive"
             component={BottomNav}
             options={{
-              headerTitle: () => <Logo name={HiFive} />,
+              headerTitle: () => <Logo />,
             }}
           />
         </Stack.Navigator>

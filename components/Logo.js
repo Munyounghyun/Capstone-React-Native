@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 
-const Logo = ({ name }) => {
+const Logo = () => {
   return (
     <>
       <Image
@@ -9,11 +9,7 @@ const Logo = ({ name }) => {
         source={require("../assets/images/hifive-logo.png")}
         resizeMode="contain"
       />
-      {name != undefined ? (
-        <Text style={styles.logoTextColor}>{name}</Text>
-      ) : (
-        <></>
-      )}
+      <Text style={styles.logoTextColor}>HiFive</Text>
     </>
   );
 };
