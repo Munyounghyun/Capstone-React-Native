@@ -1,6 +1,4 @@
-import { Button, Image, StyleSheet, Text, View } from "react-native";
-import { GlobalStyles } from "../constants/styles";
-
+import { Button, Image, StyleSheet, View } from "react-native";
 const PrimaryButton = ({ text, color }) => {
   return (
     <View style={styles.buttonBackground} backgroundColor={color}>

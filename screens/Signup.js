@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import Input from "../components/Input";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
-import { Button } from "react-native-paper";
 import PrimaryButton from "../components/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
-import VerifyInput from "../components/VerifyInpu";
+import VerifyInput from "../components/VerifyInput";
 
 const Signup = () => {
   const [date, setDate] = useState(new Date());
@@ -18,6 +17,7 @@ const Signup = () => {
     setDate(currentDate);
     console.log(currentDate);
   };
+
   return (
     <View style={{ flex: 1, alignItems: "center", marginTop: 25 }}>
       <View style={{ width: 300 }}>
@@ -43,7 +43,7 @@ const Signup = () => {
           <VerifyInput text={"Code"} btnText={"확인"} color={"#ccc"} />
         </View>
         <View style={{ marginTop: 10 }}>
-          <PrimaryButton text={"취소"} color={"red"} />
+          <PrimaryButton text={"취소"} color={"#d22e2a"} />
           <PrimaryButton
             text={"회원가입"}
             color={GlobalStyles.color.primary500}

@@ -19,22 +19,22 @@ const BottomNav = () => {
   return (
     <BottomTabs.Navigator>
       <BottomTabs.Screen
-        name="Main"
+        name="홈"
         component={Main}
         options={{ headerShown: false }}
       />
       <BottomTabs.Screen
-        name="UserInfo"
+        name="사용자 정보"
         component={UserInfo}
         options={{ headerShown: false }}
       />
       <BottomTabs.Screen
-        name="ExpenseList"
+        name="이용내역"
         component={ExpenseList}
         options={{ headerShown: false }}
       />
       <BottomTabs.Screen
-        name="CardRegist"
+        name="카드등록"
         component={CardRegist}
         options={{ headerShown: false }}
       />
@@ -61,17 +61,6 @@ export default function App() {
             headerShadowVisible: false,
           }}
         >
-          <Stack.Screen name="회원가입" component={Signup} />
-          <Stack.Screen
-            name="로그인"
-            component={Login}
-            options={{
-              headerTitle: () => <Logo />,
-            }}
-          />
-
-          <Stack.Screen name="아이디 찾기" component={FindId} />
-          <Stack.Screen name="비밀번호 변경" component={ChangePwd} />
           <Stack.Screen
             name="HiFive"
             component={BottomNav}
@@ -79,6 +68,16 @@ export default function App() {
               headerTitle: () => <Logo />,
             }}
           />
+          <Stack.Screen
+            name="로그인"
+            component={Login}
+            options={{
+              headerTitle: () => <Logo />,
+            }}
+          />
+          <Stack.Screen name="회원가입" component={Signup} />
+          <Stack.Screen name="아이디 찾기" component={FindId} />
+          <Stack.Screen name="비밀번호 변경" component={ChangePwd} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
