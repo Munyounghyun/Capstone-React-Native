@@ -1,20 +1,13 @@
-import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import Input from "../components/Input";
-import PrimaryButton from "../components/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
 import { Button } from "react-native-paper";
+import LoginInput from "../components/Auth/LoginInput";
 
 const Login = () => {
   return (
     <View style={styles.loginWrap}>
       <View>
-        <Input text={"id"} />
-        <Input text={"pwd"} secure={"secure"} />
-      </View>
-      <View>
-        <PrimaryButton text={"Login"} color={GlobalStyles.color.primary500} />
-        <PrimaryButton text={"Sign up"} color={"gray"} />
+        <LoginInput />
       </View>
       <View style={styles.findWrap}>
         <View style={styles.findInnerBox}>

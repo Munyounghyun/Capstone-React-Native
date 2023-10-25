@@ -13,4 +13,31 @@ export const GlobalStyles = {
     gray500: "#39324a",
     gray700: "#221c30",
   },
+  inputView: {
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  inputStyle: {
+    width: 300,
+    height: 50,
+    fontSize: 18,
+    borderBottomWidth: 2,
+    borderColor: "#ccc",
+    padding: 10,
+    borderRadius: 10,
+  },
+  buttonBackground: {
+    width: 300,
+    padding: 5,
+    marginTop: 20,
+    borderRadius: 25,
+    shadowColor: "rgb(50, 50, 50)",
+    shadowRadius: 5,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      height: 2,
+      width: 2,
+    },
+  },
 };

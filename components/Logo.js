@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <>
       <Image
-        style={{ width: 45, height: 45, marginTop: 20 }}
+        style={{ width: 45, height: 45, marginTop: 35 }}
         source={require("../assets/images/hifive-logo.png")}
         resizeMode="contain"
       />

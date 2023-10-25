@@ -1,53 +1,117 @@
-import { Platform, StyleSheet, Text, View } from "react-native";
-import Input from "../components/Input";
+import { Platform, StyleSheet, Text, TextInput, View } from "react-native";
+import Input from "../components/Auth/LoginInput";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
-import PrimaryButton from "../components/PrimaryButton";
 import { GlobalStyles } from "../constants/styles";
-import VerifyInput from "../components/VerifyInput";
+import { Button } from "react-native-paper";
 
 const Signup = () => {
-  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
-  const onChange = (event, selectedDate) => {
+  const [id, setId] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [repwd, setRepwd] = useState("");
+  const [date, setDate] = useState(new Date());
+  const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
+
+  const onIdChange = (e) => {
+    setId(e);
+  };
+  const onPwdChange = (e) => {
+    setPwd(e);
+  };
+  const onRePwdChange = (e) => {};
+
+  const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
     console.log(currentDate);
   };
 
+  const onEmailChange = (e) => {
+    setEmail(e);
+  };
+  const onCodeChange = (e) => {
+    setCode(e);
+  };
   return (
     <View style={{ flex: 1, alignItems: "center", marginTop: 25 }}>
       <View style={{ width: 300 }}>
-        <Input text={"ID"} />
-        <Input text={"Password"} />
-        <Input text={"RePassword"} />
-        <View style={styles.birthdayWrap}>
-          <Text>BirthDay : </Text>
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={mode}
-            display="calendar"
-            onChange={onChange}
+        <View style={GlobalStyles.inputView}>
+          <TextInput
+            style={GlobalStyles.inputStyle}
+            placeholder={"ID"}
+            value={id}
+            onChangeText={onIdChange}
           />
-        </View>
-        <View>
-          <VerifyInput
-            text={"Email"}
-            btnText={"메시지 보내기"}
-            color={GlobalStyles.color.primary500}
+          <TextInput
+            style={GlobalStyles.inputStyle}
+            placeholder={"Password"}
+            secureTextEntry="true"
+            value={pwd}
+            onChangeText={onPwdChange}
           />
-          <VerifyInput text={"Code"} btnText={"확인"} color={"#ccc"} />
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <PrimaryButton text={"취소"} color={"#d22e2a"} />
-          <PrimaryButton
-            text={"회원가입"}
-            color={GlobalStyles.color.primary500}
+          <TextInput
+            style={GlobalStyles.inputStyle}
+            placeholder={"RePassword"}
+            secureTextEntry="true"
+            value={repwd}
+            onChangeText={onRePwdChange}
           />
+          <View style={styles.birthdayWrap}>
+            <Text>BirthDay : </Text>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              display="calendar"
+              onChange={onDateChange}
+            />
+          </View>
+          <View>
+            <View style={styles.inputWrap}>
+              <TextInput
+                placeholder={"Email"}
+                style={{ width: 180, fontSize: 18 }}
+                value={email}
+                onChangeText={onEmailChange}
+              />
+              <View
+                style={styles.buttonStyle}
+                backgroundColor={GlobalStyles.color.primary500}
+              >
+                <Button textColor="white">{"메시지 보내기"}</Button>
+              </View>
+            </View>
+            <View style={styles.inputWrap}>
+              <TextInput
+                placeholder={"Code"}
+                style={{ width: 180, fontSize: 18 }}
+                value={code}
+                onChangeText={onCodeChange}
+              />
+              <View style={styles.buttonStyle} backgroundColor={"gray"}>
+                <Button textColor="white">{"확인"}</Button>
+              </View>
+            </View>
+          </View>
+          <View style={{ marginTop: 10 }}>
+            <View
+              style={GlobalStyles.buttonBackground}
+              backgroundColor={GlobalStyles.color.primary500}
+            >
+              <Button textColor={"white"}>회원가입</Button>
+            </View>
+            <View
+              style={GlobalStyles.buttonBackground}
+              backgroundColor={"#d22e2a"}
+            >
+              <Button textColor={"white"}>취소</Button>
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -64,5 +128,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     marginTop: 20,
+  },
+  inputWrap: {
+    marginTop: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: 300,
+    borderBottomWidth: 2,
+    borderBottomColor: "#ccc",
+    padding: 5,
+  },
+  buttonStyle: {
+    borderRadius: 10,
+    shadowColor: "rgb(50, 50, 50)",
+    shadowRadius: 5,
+    shadowOpacity: 0.5,
+    shadowOffset: {
+      height: 2,
+      width: 2,
+    },
   },
 });

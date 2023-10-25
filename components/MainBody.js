@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     margin: 50,
     marginBottom: 30,
+    marginTop: 65,
     padding: 35,
     borderRadius: 35,
     borderColor: "#ccc",

@@ -1,21 +1,18 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  FlatList,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainBody from "../components/MainBody";
 import ExpenseItem from "../components/ExpensItem";
+import { Button } from "react-native-paper";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import LogoutBtn from "../components/LogoutBtn";
 
 const Main = () => {
   return (
     <View>
       <ScrollView>
+        <LogoutBtn />
         <MainBody />
         <Text
           style={{
