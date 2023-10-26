@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, Text, View } from "react-native";
+import { StyleSheet, TextInput, Text, View, ScrollView } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import { Button } from "react-native-paper";
 import { useState } from "react";
@@ -41,88 +41,96 @@ const CardRegist = () => {
   };
   return (
     <View>
-      <LogoutBtn />
-      <View style={styles.cardRegistWrap}>
-        <View style={GlobalStyles.inputView}>
-          <TextInput
-            style={GlobalStyles.inputStyle}
-            placeholder={"이메일 인증번호 입력"}
-            value={code}
-            onChangeText={onCodeChange}
-          />
-        </View>
-        <View style={styles.buttonWrap}>
-          <View style={styles.buttonThrowColor}>
-            <Button textColor="white">인증번호 전송</Button>
-          </View>
-          <View style={styles.buttonVerifyColor}>
-            <Button textColor="white">인증</Button>
-          </View>
-        </View>
-        <Text
-          style={{
-            marginLeft: 65,
-            marginTop: 20,
-            marginBottom: -20,
-            fontSize: 20,
-            fontWeight: "bold",
-          }}
-        >
-          • 카드 정보 입력
-        </Text>
-        <View style={styles.cardInfoWrap}>
+      <ScrollView>
+        <LogoutBtn />
+        <View style={styles.cardRegistWrap}>
           <View style={GlobalStyles.inputView}>
             <TextInput
               style={GlobalStyles.inputStyle}
-              placeholder={"카드 번호 입력"}
-              secureTextEntry={true}
-              value={cardNum}
-              onChangeText={onCardNumChange}
-            />
-          </View>
-          <View style={GlobalStyles.inputView}>
-            <TextInput
-              style={GlobalStyles.inputStyle}
-              placeholder={"카드 이름 입력"}
-              value={cardName}
-              onChangeText={onCardNameChange}
-            />
-          </View>
-          <View style={GlobalStyles.inputView}>
-            <TextInput
-              style={GlobalStyles.inputStyle}
-              placeholder={"생년월일 입력 ex)001010"}
-              value={birth}
-              onChangeText={onBirthChange}
-            />
-          </View>
-          <View style={GlobalStyles.inputView}>
-            <TextInput
-              style={GlobalStyles.inputStyle}
-              placeholder={"유효기간 입력 ex)12/10"}
-              value={exp}
-              onChangeText={onExpChange}
-            />
-          </View>
-          <View style={GlobalStyles.inputView}>
-            <TextInput
-              style={GlobalStyles.inputStyle}
-              placeholder={"카드 비밀번호 앞 2자리"}
-              secureTextEntry={true}
-              value={pwdDigit}
-              onChangeText={onPwdDigitChange}
+              placeholder={"이메일 인증번호 입력"}
+              value={code}
+              onChangeText={onCodeChange}
             />
           </View>
           <View style={styles.buttonWrap}>
             <View style={styles.buttonThrowColor}>
-              <Button textColor="white">카드 등록</Button>
+              <Button textColor="white">인증번호 전송</Button>
             </View>
-            <View style={styles.buttonVerifyColor} backgroundColor={"#d22e2a"}>
-              <Button textColor="white">취소</Button>
+            <View style={styles.buttonVerifyColor}>
+              <Button textColor="white">인증</Button>
+            </View>
+          </View>
+          <Text
+            style={{
+              marginLeft: 65,
+              marginTop: 20,
+              marginBottom: -20,
+              fontSize: 20,
+              fontWeight: "bold",
+            }}
+          >
+            카드 정보 입력
+          </Text>
+          <View style={styles.cardInfoWrap}>
+            <View style={styles.cardInfoInnerWrap}>
+              <View style={GlobalStyles.inputView}>
+                <TextInput
+                  style={GlobalStyles.smallInputStyle}
+                  placeholder={"카드 번호 입력"}
+                  secureTextEntry={true}
+                  value={cardNum}
+                  onChangeText={onCardNumChange}
+                />
+              </View>
+              <View style={GlobalStyles.inputView}>
+                <TextInput
+                  style={GlobalStyles.smallInputStyle}
+                  placeholder={"카드 이름 입력"}
+                  value={cardName}
+                  onChangeText={onCardNameChange}
+                />
+              </View>
+              <View style={GlobalStyles.inputView}>
+                <TextInput
+                  style={GlobalStyles.smallInputStyle}
+                  placeholder={"생년월일 입력 ex)001010"}
+                  value={birth}
+                  onChangeText={onBirthChange}
+                />
+              </View>
+              <View style={GlobalStyles.inputView}>
+                <TextInput
+                  style={GlobalStyles.smallInputStyle}
+                  placeholder={"유효기간 입력 ex)12/10"}
+                  value={exp}
+                  onChangeText={onExpChange}
+                />
+              </View>
+              <View style={GlobalStyles.inputView}>
+                <TextInput
+                  style={GlobalStyles.smallInputStyle}
+                  placeholder={"카드 비밀번호 앞 2자리"}
+                  secureTextEntry={true}
+                  value={pwdDigit}
+                  onChangeText={onPwdDigitChange}
+                />
+              </View>
+
+              <View style={styles.buttonWrap}>
+                <View style={styles.buttonThrowColor}>
+                  <Button textColor="white">카드 등록</Button>
+                </View>
+                <View
+                  style={styles.buttonVerifyColor}
+                  backgroundColor={"#d22e2a"}
+                >
+                  <Button textColor="white">취소</Button>
+                </View>
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -134,7 +142,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   buttonWrap: {
-    margin: 10,
+    margin: 15,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -175,11 +183,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   cardInfoInnerWrap: {
-    width: 300,
     borderWidth: 1,
-    padding: 20,
+    padding: 10,
     borderColor: "#ccc",
     borderRadius: 20,
+    marginTop: 15,
   },
   cardWrap: {
     margin: 10,

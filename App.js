@@ -9,8 +9,8 @@ import ChangePwd from "./screens/ChangePwd";
 import FindId from "./screens/FindId";
 import UserInfo from "./screens/UserInfo";
 import ExpenseList from "./screens/ExpenseList";
-import CardRegist from "./screens/CardRegist";
 import Logo from "./components/Logo";
+import { Ionicons } from "@expo/vector-icons";
 
 //두 컴포넌트에 대한  액세스를 제공하는 객체
 const Stack = createNativeStackNavigator();
@@ -19,24 +19,34 @@ const BottomNav = () => {
   return (
     <BottomTabs.Navigator>
       <BottomTabs.Screen
+        name="이용내역"
+        component={ExpenseList}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="list" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
         name="홈"
         component={Main}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
+        }}
       />
       <BottomTabs.Screen
         name="사용자 정보"
         component={UserInfo}
-        options={{ headerShown: false }}
-      />
-      <BottomTabs.Screen
-        name="이용내역"
-        component={ExpenseList}
-        options={{ headerShown: false }}
-      />
-      <BottomTabs.Screen
-        name="카드등록"
-        component={CardRegist}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="people" size={size} color={color} />
+          ),
+        }}
       />
     </BottomTabs.Navigator>
   );

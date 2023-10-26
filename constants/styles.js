@@ -18,8 +18,18 @@ export const GlobalStyles = {
     justifyContent: "center",
     alignItems: "center",
   },
+
   inputStyle: {
     width: 300,
+    height: 50,
+    fontSize: 18,
+    borderBottomWidth: 2,
+    borderColor: "#ccc",
+    padding: 10,
+    borderRadius: 10,
+  },
+  smallInputStyle: {
+    width: 250,
     height: 50,
     fontSize: 18,
     borderBottomWidth: 2,
