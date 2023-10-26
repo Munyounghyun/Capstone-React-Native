@@ -3,6 +3,7 @@ import { GlobalStyles } from "../constants/styles";
 import { Button } from "react-native-paper";
 import { useState } from "react";
 import LogoutBtn from "../components/LogoutBtn";
+import Logo from "../components/Logo";
 
 const CardRegist = () => {
   //인증번호
@@ -42,6 +43,7 @@ const CardRegist = () => {
   return (
     <View>
       <ScrollView>
+        <Logo />
         <LogoutBtn />
         <View style={styles.cardRegistWrap}>
           <View style={GlobalStyles.inputView}>

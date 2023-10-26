@@ -7,6 +7,7 @@ const LogoutBtn = () => {
     <View
       style={{
         position: "absolute",
+        top: 75,
         right: 60,
       }}
     >

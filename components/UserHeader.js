@@ -30,7 +30,7 @@ export default UserHeader;
 const styles = StyleSheet.create({
   userHeaderWrap: {
     flexDirection: "row",
-    marginTop: 90,
+    marginTop: 40,
     justifyContent: "center",
   },
   userHeaderInnerWrap: {

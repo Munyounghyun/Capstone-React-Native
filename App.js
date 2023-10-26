@@ -9,8 +9,10 @@ import ChangePwd from "./screens/ChangePwd";
 import FindId from "./screens/FindId";
 import UserInfo from "./screens/UserInfo";
 import ExpenseList from "./screens/ExpenseList";
-import Logo from "./components/Logo";
 import { Ionicons } from "@expo/vector-icons";
+import CardList from "./screens/CardList";
+import CardRegist from "./screens/CardRegist";
+import UserContextProvider from "./store/user-context";
 
 //두 컴포넌트에 대한  액세스를 제공하는 객체
 const Stack = createNativeStackNavigator();
@@ -56,40 +58,37 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      <NavigationContainer
-        theme={{
-          colors: {
-            background: "#f8f8f8",
-          },
-        }}
-      >
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: "#f8f8f8",
+      <UserContextProvider>
+        <NavigationContainer
+          theme={{
+            colors: {
+              background: "#f8f8f8",
             },
-            headerShadowVisible: false,
           }}
         >
-          <Stack.Screen
-            name="HiFive"
-            component={BottomNav}
-            options={{
-              headerTitle: () => <Logo />,
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: "#f8f8f8",
+              },
+              headerShadowVisible: false,
+              headerShown: false,
             }}
-          />
-          <Stack.Screen
-            name="로그인"
-            component={Login}
-            options={{
-              headerTitle: () => <Logo />,
-            }}
-          />
-          <Stack.Screen name="회원가입" component={Signup} />
-          <Stack.Screen name="아이디 찾기" component={FindId} />
-          <Stack.Screen name="비밀번호 변경" component={ChangePwd} />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            <Stack.Screen name="로그인" component={Login} />
+            <Stack.Screen name="HiFive" component={BottomNav} />
+
+            <Stack.Screen name="회원가입" component={Signup} />
+            <Stack.Screen name="아이디 찾기" component={FindId} />
+            <Stack.Screen name="비밀번호 변경" component={ChangePwd} />
+
+            <Stack.Screen name="사용자 정보" component={UserInfo} />
+            <Stack.Screen name="카드 리스트" component={CardList} />
+            <Stack.Screen name="카드 등록" component={CardRegist} />
+            <Stack.Screen name="이용내역" component={ExpenseList} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </UserContextProvider>
     </>
   );
 }

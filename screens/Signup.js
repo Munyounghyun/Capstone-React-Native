@@ -50,14 +50,14 @@ const Signup = () => {
           <TextInput
             style={GlobalStyles.inputStyle}
             placeholder={"Password"}
-            secureTextEntry="true"
+            secureTextEntry={true}
             value={pwd}
             onChangeText={onPwdChange}
           />
           <TextInput
             style={GlobalStyles.inputStyle}
             placeholder={"RePassword"}
-            secureTextEntry="true"
+            secureTextEntry={true}
             value={repwd}
             onChangeText={onRePwdChange}
           />

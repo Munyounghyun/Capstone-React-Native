@@ -1,16 +1,23 @@
-import { Image, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 
 const Logo = () => {
   return (
-    <>
+    <View
+      style={{
+        marginTop: 60,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Image
-        style={{ width: 45, height: 45, marginTop: 35 }}
+        style={{ width: 45, height: 45 }}
         source={require("../assets/images/hifive-logo.png")}
         resizeMode="contain"
       />
       <Text style={styles.logoTextColor}>HiFive</Text>
-    </>
+    </View>
   );
 };
 
@@ -24,6 +31,5 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     marginLeft: 10,
     marginRight: 40,
-    marginTop: 25,
   },
 });

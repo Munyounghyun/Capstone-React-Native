@@ -1,11 +1,17 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
+import { useContext } from "react";
+import { UserContext } from "../store/user-context";
 
 const MainBody = () => {
+  const userCtx = useContext(UserContext);
+
   return (
     <View style={styles.bodyWrap}>
-      <Text style={styles.bodyFontStyle}>XXX님</Text>
-      <Text style={styles.bodyFontStyle}>2023년 10월 사용내역</Text>
+      <Text style={styles.bodyFontStyle}>{userCtx.user.userName}</Text>
+      <Text style={styles.bodyFontStyle}>
+        {new Date().getFullYear()}년 {new Date().getMonth() + 1}월 사용내역
+      </Text>
       <Text style={styles.bodyFontStyle}>총 0원</Text>
     </View>
   );
@@ -19,7 +25,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     margin: 50,
     marginBottom: 30,
-    marginTop: 65,
     padding: 35,
     borderRadius: 35,
     borderColor: "#ccc",

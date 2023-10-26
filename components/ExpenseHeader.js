@@ -47,7 +47,7 @@ export default ExpenseHeader;
 
 const styles = StyleSheet.create({
   headerWrap: {
-    marginTop: 50,
+    marginTop: 30,
     marginBottom: 20,
     flexDirection: "row",
   },

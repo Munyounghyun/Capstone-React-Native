@@ -1,34 +1,59 @@
 import { createContext, useReducer } from "react";
 
 export const UserContext = createContext({
-  //초기값 설정
-  id: "",
-  email: "",
-  loginUser: ({ id, email }) => {
-    id;
+  user: {
+    id: "",
+    userName: "",
+    email: "",
   },
+  loginUser: ({ id, userName, email }) => {},
   logoutUser: ({ id }) => {},
 });
 
 const userReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      return { id, email };
+      return {
+        ...state,
+        id: action.payload.id,
+        userName: action.payload.userName,
+        email: action.payload.email,
+      };
     case "LOGOUT":
+      return {
+        ...state,
+        id: "",
+        userName: "",
+        email: "",
+      };
+    default:
+      return state;
   }
 };
 
-const UserContextProvider = ({ children }) => {
-  const [userState, dispatch] = useReducer(useReducer);
+const initialState = {
+  id: "",
+  email: "",
+};
 
-  const loginUser = ({ id, email }) => {
-    dispatch({ type: "LOGIN", payload: { id, email } });
+const UserContextProvider = ({ children }) => {
+  const [userState, dispatch] = useReducer(userReducer, initialState);
+
+  const loginUser = ({ id, userName, email }) => {
+    dispatch({ type: "LOGIN", payload: { id, userName, email } });
   };
-  const logOut = ({ id }) => {
+
+  const logoutUser = ({ id }) => {
     dispatch({ type: "LOGOUT", payload: { id } });
   };
 
-  return <UserContext.Provider>{children}</UserContext.Provider>;
+  const value = {
+    user: userState,
+    loginUser: loginUser,
+    logoutUser: logoutUser,
+  };
+
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export default UserContextProvider;

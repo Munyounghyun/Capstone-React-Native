@@ -1,8 +1,12 @@
 import { Button, StyleSheet, TextInput, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { UserContext } from "../../store/user-context";
 
 const LoginInput = () => {
+  const userCtx = useContext(UserContext);
+
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
 
@@ -13,6 +17,15 @@ const LoginInput = () => {
     setPwd(e);
   };
 
+  const navigation = useNavigation();
+  const goSignup = () => {
+    navigation.navigate("회원가입");
+  };
+
+  const loginCheck = () => {
+    userCtx.loginUser({ id: id, userName: "test", email: pwd });
+    navigation.navigate("HiFive");
+  };
   return (
     <View style={GlobalStyles.inputView}>
       <TextInput
@@ -32,10 +45,10 @@ const LoginInput = () => {
         style={GlobalStyles.buttonBackground}
         backgroundColor={GlobalStyles.color.primary500}
       >
-        <Button title={"로그인"} color={"white"} />
+        <Button title={"로그인"} color={"white"} onPress={loginCheck} />
       </View>
       <View style={GlobalStyles.buttonBackground} backgroundColor={"gray"}>
-        <Button title={"회원가입"} color={"white"} />
+        <Button title={"회원가입"} color={"white"} onPress={goSignup} />
       </View>
     </View>
   );

@@ -3,15 +3,14 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 
 import MainBody from "../components/MainBody";
 import ExpenseItem from "../components/ExpensItem";
-import { Button } from "react-native-paper";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import LogoutBtn from "../components/LogoutBtn";
+import Logo from "../components/Logo";
 
 const Main = () => {
   return (
     <View>
       <ScrollView>
+        <Logo />
         <LogoutBtn />
         <MainBody />
         <Text
