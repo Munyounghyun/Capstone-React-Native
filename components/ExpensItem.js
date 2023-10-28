@@ -1,11 +1,12 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 
-const ExpenseItem = () => {
+const ExpenseItem = ({ expenseData }) => {
   return (
     <View style={styles.bodyWrap}>
-      <Text style={styles.bodyFontStyle}>2023/10/01</Text>
-      <Text style={styles.bodyFontStyle}>0원</Text>
+      <Text style={styles.bodyFontStyle}>{expenseData.date.slice(0, 10)}</Text>
+      <Text style={styles.bodyFontStyle}>{expenseData.card_name}</Text>
+      <Text style={styles.bodyFontStyle}>{expenseData.fee}원</Text>
     </View>
   );
 };

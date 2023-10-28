@@ -1,8 +1,11 @@
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native-paper";
+import { UserContext } from "../store/user-context";
 const UserHeader = () => {
+  const userCtx = useContext(UserContext);
   return (
     <View style={styles.userHeaderWrap}>
       <View style={styles.userHeaderInnerWrap}>
@@ -13,10 +16,10 @@ const UserHeader = () => {
         </View>
         <View style={styles.headerRightWrap}>
           <Text style={{ fontWeight: "bold", fontSize: 18, marginBottom: 10 }}>
-            XXX님
+            {userCtx.user.userName}님
           </Text>
           <Text style={{ fontWeight: "bold", marginBottom: 5 }}>
-            이메일 : xxx@naver.com
+            이메일 : {userCtx.user.email}
           </Text>
           <Text style={{ fontWeight: "bold" }}>이번달 사용 금액 : 0원</Text>
         </View>

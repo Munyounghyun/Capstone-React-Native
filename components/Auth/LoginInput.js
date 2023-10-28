@@ -1,8 +1,10 @@
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { Alert, Text, TextInput, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { UserContext } from "../../store/user-context";
+import { loginRequest } from "../../util/http";
+import { Button } from "react-native-paper";
 
 const LoginInput = () => {
   const userCtx = useContext(UserContext);
@@ -22,9 +24,22 @@ const LoginInput = () => {
     navigation.navigate("회원가입");
   };
 
-  const loginCheck = () => {
-    userCtx.loginUser({ id: id, userName: "test", email: pwd });
-    navigation.navigate("HiFive");
+  const loginCheck = async () => {
+    try {
+      const responsData = await loginRequest({ id, pwd });
+      if (responsData.success == true) {
+        userCtx.loginUser({
+          id: id,
+          userName: responsData.name,
+          email: responsData.email,
+        });
+        navigation.navigate("HiFive");
+      } else {
+        Alert.alert("로그인 실패", "아이디 또는 비밀번호가 잘못되었습니다.");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <View style={GlobalStyles.inputView}>
@@ -45,10 +60,14 @@ const LoginInput = () => {
         style={GlobalStyles.buttonBackground}
         backgroundColor={GlobalStyles.color.primary500}
       >
-        <Button title={"로그인"} color={"white"} onPress={loginCheck} />
+        <Button textColor="white" onPress={loginCheck}>
+          <Text style={{ fontSize: 16, lineHeight: 16 }}>로그인</Text>
+        </Button>
       </View>
       <View style={GlobalStyles.buttonBackground} backgroundColor={"gray"}>
-        <Button title={"회원가입"} color={"white"} onPress={goSignup} />
+        <Button textColor="white" onPress={goSignup}>
+          <Text style={{ fontSize: 16, lineHeight: 16 }}>회원가입</Text>
+        </Button>
       </View>
     </View>
   );

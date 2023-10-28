@@ -3,15 +3,21 @@ import { GlobalStyles } from "../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
 
-const CardBox = () => {
+const CardBox = ({ cardData }) => {
   return (
     <View style={styles.bodyWrap}>
       <Ionicons name="card" color={"white"} size={50} />
-      <Text style={styles.cardText}>신한 카드</Text>
+      <Text style={styles.cardText}>{cardData.card_name}</Text>
       <View>
-        <Button style={styles.cardStyle} textColor="white">
-          결제 카드 설정
-        </Button>
+        {cardData.pay_card !== 1 ? (
+          <Button style={styles.cardStyle} textColor="white">
+            결제 카드 설정
+          </Button>
+        ) : (
+          <Button style={styles.mainCardStyle} textColor="white">
+            대표카드
+          </Button>
+        )}
         <Button style={styles.deleteCardStyle} textColor="white">
           카드 삭제
         </Button>
@@ -48,6 +54,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     backgroundColor: "gray",
+  },
+  mainCardStyle: {
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: GlobalStyles.color.primary500,
   },
   deleteCardStyle: {
     marginTop: 10,

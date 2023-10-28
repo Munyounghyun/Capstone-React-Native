@@ -24,12 +24,7 @@ const Main = () => {
         >
           최근 결제 내역
         </Text>
-        <View style={styles.expenseItemStyle}>
-          <ExpenseItem />
-          <ExpenseItem />
-          <ExpenseItem />
-          <ExpenseItem />
-        </View>
+        <View style={styles.expenseItemStyle}></View>
       </ScrollView>
     </View>
   );
