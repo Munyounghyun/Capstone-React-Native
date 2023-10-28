@@ -3,7 +3,7 @@ import { GlobalStyles } from "../constants/styles";
 import { useContext } from "react";
 import { UserContext } from "../store/user-context";
 
-const MainBody = () => {
+const MainBody = ({ total }) => {
   const userCtx = useContext(UserContext);
 
   return (
@@ -12,7 +12,7 @@ const MainBody = () => {
       <Text style={styles.bodyFontStyle}>
         {new Date().getFullYear()}년 {new Date().getMonth() + 1}월 사용내역
       </Text>
-      <Text style={styles.bodyFontStyle}>총 0원</Text>
+      <Text style={styles.bodyFontStyle}>총 {total}원</Text>
     </View>
   );
 };

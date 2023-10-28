@@ -5,44 +5,65 @@ import CardBox from "../components/CardBox";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../store/user-context";
 import { cardList } from "../util/http";
+import { Ionicons } from "@expo/vector-icons";
+import { Button } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 const CardList = () => {
   const userCtx = useContext(UserContext);
+  const navigation = useNavigation();
   const [cardData, setCardData] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseData = await cardList({
-          id: userCtx.user.id,
-        });
-        if (responseData.success == true) {
-          //데이터 불러오기는 성공 수정 필요!!!
-          setCardData(responseData.card);
-        }
-      } catch (e) {
-        console.log(e);
+
+  const goAddCard = () => {
+    navigation.navigate("카드 등록");
+  };
+
+  //카드 불러오기
+  const cardListCall = async () => {
+    try {
+      const responseData = await cardList({
+        id: userCtx.user.id,
+      });
+      if (responseData.success == true) {
+        setCardData(responseData.card);
       }
-    };
-    fetchData();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    cardListCall();
   }, []);
   return (
     <ScrollView>
       <Logo />
       <LogoutBtn />
       <View style={styles.cardBoxPosition}>
-        <Text
+        <View
           style={{
-            width: 300,
-            fontWeight: "bold",
-            fontSize: 20,
+            flexDirection: "row",
+            alignItems: "center",
+            paddingLeft: 30,
           }}
         >
-          카드 목록
-        </Text>
+          <Text
+            style={{
+              width: 300,
+              fontWeight: "bold",
+              fontSize: 20,
+            }}
+          >
+            카드 목록
+          </Text>
+          <Button onPress={goAddCard}>
+            <Ionicons name="add" size={20} />
+          </Button>
+        </View>
         <View style={styles.cardBoxWrap}>
           {Array.isArray(cardData) && cardData.length !== 0 ? (
             cardData.map((item, index) => (
-              <CardBox key={index} cardData={item} />
+              <CardBox key={index} cardData={item} onRefresh={cardListCall} />
             ))
           ) : (
             <>

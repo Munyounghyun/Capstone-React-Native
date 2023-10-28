@@ -21,7 +21,6 @@ const UserHeader = () => {
           <Text style={{ fontWeight: "bold", marginBottom: 5 }}>
             이메일 : {userCtx.user.email}
           </Text>
-          <Text style={{ fontWeight: "bold" }}>이번달 사용 금액 : 0원</Text>
         </View>
       </View>
     </View>

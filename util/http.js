@@ -127,3 +127,37 @@ export const expenseList = async ({ id, year, month }) => {
     console.log(e);
   }
 };
+
+//결제 카드 변경
+export const chageMainCard = async ({ id, card_num }) => {
+  try {
+    const response = await axios.put(
+      "http://hxlab.co.kr:30000/users/change-card",
+      {
+        id,
+        card_num,
+      }
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+//카드 삭제
+export const deleteCard = async ({ id, card_num }) => {
+  try {
+    const response = await axios.delete(
+      "http://hxlab.co.kr:30000/users/card-delete",
+      {
+        data: {
+          id,
+          card_num,
+        },
+      }
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};

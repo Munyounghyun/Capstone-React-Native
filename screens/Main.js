@@ -5,14 +5,42 @@ import MainBody from "../components/MainBody";
 import ExpenseItem from "../components/ExpensItem";
 import LogoutBtn from "../components/LogoutBtn";
 import Logo from "../components/Logo";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../store/user-context";
+import { expenseList } from "../util/http";
 
 const Main = () => {
+  const userCtx = useContext(UserContext);
+
+  const [expenseData, setExpenseData] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseData = await expenseList({
+          id: userCtx.user.id,
+          year: new Date().getFullYear(),
+          month: new Date().getMonth() + 1,
+        });
+        if (responseData.success == true) {
+          //데이터 불러오기는 성공 수정 필요!!!
+          setExpenseData(responseData.data);
+          setTotal(responseData.total);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <View>
       <ScrollView>
         <Logo />
         <LogoutBtn />
-        <MainBody />
+        <MainBody total={total} />
         <Text
           style={{
             marginLeft: 65,
@@ -24,7 +52,19 @@ const Main = () => {
         >
           최근 결제 내역
         </Text>
-        <View style={styles.expenseItemStyle}></View>
+        <View style={styles.expenseItemStyle}>
+          {Array.isArray(expenseData) && expenseData.length !== 0 ? (
+            expenseData
+              .slice(0, 10)
+              .map((item, index) => (
+                <ExpenseItem key={index} expenseData={item} />
+              ))
+          ) : (
+            <>
+              <Text>등록된 카드가 없습니다.</Text>
+            </>
+          )}
+        </View>
       </ScrollView>
     </View>
   );

@@ -113,6 +113,9 @@ const CardRegist = () => {
         <Logo />
         <LogoutBtn />
         <View style={styles.cardRegistWrap}>
+          <View style={{ marginLeft: 65 }}>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>카드 등록</Text>
+          </View>
           <View style={GlobalStyles.inputView}>
             <TextInput
               style={GlobalStyles.inputStyle}

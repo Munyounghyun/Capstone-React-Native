@@ -77,9 +77,13 @@ const ExpenseList = () => {
             <ExpenseItem key={index} expenseData={item} />
           ))
         ) : (
-          <>
-            <Text>결제 내역이 없습니다.</Text>
-          </>
+          <View>
+            <Text
+              style={{ textAlign: "center", fontSize: 16, fontWeight: "700" }}
+            >
+              결제 내역이 없습니다.
+            </Text>
+          </View>
         )}
       </View>
     </ScrollView>
