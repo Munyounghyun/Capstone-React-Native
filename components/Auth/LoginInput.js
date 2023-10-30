@@ -19,6 +19,11 @@ const LoginInput = () => {
     setPwd(e);
   };
 
+  const clearSet = () => {
+    setId("");
+    setPwd("");
+  };
+
   const navigation = useNavigation();
   const goSignup = () => {
     navigation.navigate("회원가입");
@@ -33,7 +38,11 @@ const LoginInput = () => {
           userName: responsData.name,
           email: responsData.email,
         });
-        navigation.navigate("HiFive");
+        clearSet();
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "HiFive" }],
+        });
       } else {
         Alert.alert("로그인 실패", "아이디 또는 비밀번호가 잘못되었습니다.");
       }

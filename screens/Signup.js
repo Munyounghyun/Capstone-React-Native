@@ -84,7 +84,7 @@ const Signup = () => {
         birth: birth,
         certification: certificataion,
       });
-      if (responsData.success) {
+      if (responsData.success == true) {
         Alert.alert("성공", "회원가입 성공!");
         navigation.navigate("로그인");
       } else {

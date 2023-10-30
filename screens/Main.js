@@ -11,7 +11,6 @@ import { expenseList } from "../util/http";
 
 const Main = () => {
   const userCtx = useContext(UserContext);
-
   const [expenseData, setExpenseData] = useState([]);
   const [total, setTotal] = useState(0);
 
@@ -47,7 +46,7 @@ const Main = () => {
             marginBottom: 5,
             marginTop: 15,
             fontWeight: "bold",
-            fontSize: 17,
+            fontSize: 19,
           }}
         >
           최근 결제 내역
@@ -60,9 +59,11 @@ const Main = () => {
                 <ExpenseItem key={index} expenseData={item} />
               ))
           ) : (
-            <>
-              <Text>등록된 카드가 없습니다.</Text>
-            </>
+            <View style={{ alignItems: "center", margin: 50 }}>
+              <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+                최근 결제내역 없습니다.
+              </Text>
+            </View>
           )}
         </View>
       </ScrollView>
@@ -79,12 +80,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 35,
     borderColor: "#bcbcbc",
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
   },
 });

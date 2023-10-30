@@ -65,6 +65,49 @@ export const singup = async ({
   }
 };
 
+//아이디 찾기
+export const findId = async ({ name, email, certification }) => {
+  try {
+    const response = await axios.get("http://hxlab.co.kr:30000/users/find-id", {
+      params: { name, email, certification },
+    });
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+//비밀번호 변경
+export const changePwd = async ({ id, pwd, certification }) => {
+  try {
+    const response = await axios.put(
+      "http://hxlab.co.kr:30000/users/change-pwd",
+      {
+        id,
+        pwd,
+        certification,
+      }
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+//회원탈퇴
+export const deleteUser = async ({ id, pwd }) => {
+  try {
+    const response = await axios.delete(
+      "http://hxlab.co.kr:30000/users/delete",
+      {
+        data: { id, pwd },
+      }
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 //카드 등록
 export const cardRegist = async ({
   card_number,

@@ -3,8 +3,16 @@ import { GlobalStyles } from "../constants/styles";
 import { Button } from "react-native-paper";
 import LoginInput from "../components/Auth/LoginInput";
 import Logo from "../components/Logo";
+import { useNavigation } from "@react-navigation/native";
 
 const Login = () => {
+  const navigate = useNavigation();
+  const goChangePwd = () => {
+    navigate.navigate("비밀번호 변경");
+  };
+  const goFindId = () => {
+    navigate.navigate("아이디 찾기");
+  };
   return (
     <View style={styles.loginWrap}>
       <Logo />
@@ -17,6 +25,7 @@ const Login = () => {
             textColor={GlobalStyles.color.gray500}
             title="아이디 찾기"
             labelStyle={{ fontSize: 14 }}
+            onPress={goFindId}
           >
             아이디 찾기
           </Button>
@@ -24,8 +33,9 @@ const Login = () => {
           <Button
             textColor={GlobalStyles.color.gray500}
             labelStyle={{ fontSize: 14 }}
+            onPress={goChangePwd}
           >
-            비밀번호 찾기
+            비밀번호 변경
           </Button>
         </View>
       </View>

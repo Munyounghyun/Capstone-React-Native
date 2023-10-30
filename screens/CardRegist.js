@@ -14,6 +14,7 @@ import Logo from "../components/Logo";
 import { UserContext } from "../store/user-context";
 import { cardRegist, emailCheck, sendEmail } from "../util/http";
 import { useNavigation } from "@react-navigation/native";
+import BackBtn from "../components/BackBtn";
 
 const CardRegist = () => {
   const userCtx = useContext(UserContext);
@@ -112,6 +113,7 @@ const CardRegist = () => {
       <ScrollView>
         <Logo />
         <LogoutBtn />
+        <BackBtn />
         <View style={styles.cardRegistWrap}>
           <View style={{ marginLeft: 65 }}>
             <Text style={{ fontSize: 18, fontWeight: "bold" }}>카드 등록</Text>

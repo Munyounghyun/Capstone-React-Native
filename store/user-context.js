@@ -6,6 +6,7 @@ export const UserContext = createContext({
     userName: "",
     email: "",
   },
+
   loginUser: ({ id, userName, email }) => {},
   logoutUser: ({ id }) => {},
 });
@@ -33,6 +34,7 @@ const userReducer = (state, action) => {
 
 const initialState = {
   id: "",
+  userName: "",
   email: "",
 };
 

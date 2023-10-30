@@ -8,6 +8,7 @@ import { cardList } from "../util/http";
 import { Ionicons } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import BackBtn from "../components/BackBtn";
 
 const CardList = () => {
   const userCtx = useContext(UserContext);
@@ -39,6 +40,7 @@ const CardList = () => {
     <ScrollView>
       <Logo />
       <LogoutBtn />
+      <BackBtn />
       <View style={styles.cardBoxPosition}>
         <View
           style={{
