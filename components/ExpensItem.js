@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 
 const ExpenseItem = ({ expenseData }) => {
@@ -22,14 +22,18 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 35,
     borderColor: "#ccc",
-    backgroundColor: GlobalStyles.color.primary700,
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
+    backgroundColor: "#6930c3",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
   bodyFontStyle: {
     color: "white",

@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 import { GlobalStyles } from "../constants/styles";
 import { useNavigation } from "@react-navigation/native";
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 340,
     height: 50,
-    backgroundColor: GlobalStyles.color.primary700,
+    backgroundColor: "#6a4c93",
     justifyContent: "center",
     fontSize: 18,
     color: "white",
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     fontSize: 18,
     color: "white",
-    backgroundColor: "#75885c",
+    backgroundColor: "#1982c4",
     shadowColor: "rgb(50, 50, 50)",
     shadowRadius: 5,
     shadowOpacity: 0.5,
@@ -133,13 +133,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     fontSize: 18,
     color: "white",
-    backgroundColor: "#d22e2a",
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
+    backgroundColor: "#ff595e",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
 });

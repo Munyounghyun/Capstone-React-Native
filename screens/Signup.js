@@ -1,4 +1,10 @@
-import { Alert, StyleSheet, TextInput, View } from "react-native";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 import { useState } from "react";
 import { GlobalStyles } from "../constants/styles";
 import { Button } from "react-native-paper";
@@ -40,6 +46,17 @@ const Signup = () => {
   };
   const onCodeChange = (e) => {
     setCode(e);
+  };
+
+  const setClear = () => {
+    setUserName("");
+    setCode("");
+    setPwd("");
+    setRepwd("");
+    setBirth("");
+    setEmail("");
+    setCode("");
+    setCertification(false);
   };
 
   //인증번호 전송
@@ -87,6 +104,7 @@ const Signup = () => {
       if (responsData.success == true) {
         Alert.alert("성공", "회원가입 성공!");
         navigation.navigate("로그인");
+        setClear();
       } else {
         Alert.alert(
           "실패",
@@ -98,96 +116,102 @@ const Signup = () => {
 
   const goLogin = () => {
     navigation.navigate("로그인");
+    setClear();
   };
   return (
     <View style={{ flex: 1, alignItems: "center", marginTop: 25 }}>
       <Logo />
-      <View style={{ width: 300 }}>
-        <View style={GlobalStyles.inputView}>
-          <TextInput
-            style={GlobalStyles.inputStyle}
-            placeholder={"Name"}
-            value={userName}
-            onChangeText={onNameChange}
-          />
-          <TextInput
-            style={GlobalStyles.inputStyle}
-            placeholder={"ID"}
-            value={id}
-            onChangeText={onIdChange}
-          />
-          <TextInput
-            style={GlobalStyles.inputStyle}
-            placeholder={"Password"}
-            secureTextEntry={true}
-            value={pwd}
-            onChangeText={onPwdChange}
-          />
-          <TextInput
-            style={GlobalStyles.inputStyle}
-            placeholder={"RePassword"}
-            secureTextEntry={true}
-            value={repwd}
-            onChangeText={onRePwdChange}
-          />
-          <TextInput
-            style={GlobalStyles.inputStyle}
-            placeholder={"BirthDay ex)yyyymmdd, 991018"}
-            secureTextEntry={true}
-            value={birth}
-            onChangeText={onBirthChange}
-          />
-          <View>
-            <View style={styles.inputWrap}>
-              <TextInput
-                placeholder={"Email"}
-                style={{ width: 180, fontSize: 18 }}
-                value={email}
-                onChangeText={onEmailChange}
-              />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+      >
+        <View style={{ width: 300 }}>
+          <View style={GlobalStyles.inputView}>
+            <TextInput
+              style={GlobalStyles.inputStyle}
+              placeholder={"Name"}
+              value={userName}
+              onChangeText={onNameChange}
+            />
+            <TextInput
+              style={GlobalStyles.inputStyle}
+              placeholder={"ID"}
+              value={id}
+              onChangeText={onIdChange}
+            />
+            <TextInput
+              style={GlobalStyles.inputStyle}
+              placeholder={"Password"}
+              secureTextEntry={true}
+              value={pwd}
+              onChangeText={onPwdChange}
+            />
+            <TextInput
+              style={GlobalStyles.inputStyle}
+              placeholder={"RePassword"}
+              secureTextEntry={true}
+              value={repwd}
+              onChangeText={onRePwdChange}
+            />
+            <TextInput
+              style={GlobalStyles.inputStyle}
+              placeholder={"BirthDay ex)yyyymmdd, 991018"}
+              secureTextEntry={true}
+              value={birth}
+              onChangeText={onBirthChange}
+            />
+            <View>
+              <View style={styles.inputWrap}>
+                <TextInput
+                  placeholder={"Email"}
+                  style={{ width: 180, fontSize: 18 }}
+                  value={email}
+                  onChangeText={onEmailChange}
+                />
+                <View
+                  style={styles.buttonStyle}
+                  backgroundColor={GlobalStyles.color.primary500}
+                >
+                  <Button textColor="white" onPress={sendEmailCode}>
+                    {"메시지 보내기"}
+                  </Button>
+                </View>
+              </View>
+              <View style={styles.inputWrap}>
+                <TextInput
+                  placeholder={"Code"}
+                  style={{ width: 180, fontSize: 18 }}
+                  value={code}
+                  onChangeText={onCodeChange}
+                />
+                <View style={styles.buttonStyle} backgroundColor={"gray"}>
+                  <Button textColor="white" onPress={checkCode}>
+                    {"확인"}
+                  </Button>
+                </View>
+              </View>
+            </View>
+            <View style={{ marginTop: 10 }}>
               <View
-                style={styles.buttonStyle}
+                style={GlobalStyles.buttonBackground}
                 backgroundColor={GlobalStyles.color.primary500}
               >
-                <Button textColor="white" onPress={sendEmailCode}>
-                  {"메시지 보내기"}
+                <Button textColor={"white"} onPress={onSignup}>
+                  회원가입
                 </Button>
               </View>
-            </View>
-            <View style={styles.inputWrap}>
-              <TextInput
-                placeholder={"Code"}
-                style={{ width: 180, fontSize: 18 }}
-                value={code}
-                onChangeText={onCodeChange}
-              />
-              <View style={styles.buttonStyle} backgroundColor={"gray"}>
-                <Button textColor="white" onPress={checkCode}>
-                  {"확인"}
+              <View
+                style={GlobalStyles.buttonBackground}
+                backgroundColor={"#ff595e"}
+              >
+                <Button textColor={"white"} onPress={goLogin}>
+                  취소
                 </Button>
               </View>
-            </View>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <View
-              style={GlobalStyles.buttonBackground}
-              backgroundColor={GlobalStyles.color.primary500}
-            >
-              <Button textColor={"white"} onPress={onSignup}>
-                회원가입
-              </Button>
-            </View>
-            <View
-              style={GlobalStyles.buttonBackground}
-              backgroundColor={"#d22e2a"}
-            >
-              <Button textColor={"white"} onPress={goLogin}>
-                취소
-              </Button>
             </View>
           </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -214,12 +238,16 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     borderRadius: 10,
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
 });

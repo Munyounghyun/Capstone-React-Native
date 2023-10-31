@@ -1,5 +1,11 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import MainBody from "../components/MainBody";
 import ExpenseItem from "../components/ExpensItem";
@@ -13,8 +19,9 @@ const Main = () => {
   const userCtx = useContext(UserContext);
   const [expenseData, setExpenseData] = useState([]);
   const [total, setTotal] = useState(0);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         const responseData = await expenseList({
@@ -27,8 +34,10 @@ const Main = () => {
           setExpenseData(responseData.data);
           setTotal(responseData.total);
         }
+        setLoading(false);
       } catch (e) {
         console.log(e);
+        setLoading(false);
       }
     };
     fetchData();
@@ -36,36 +45,42 @@ const Main = () => {
 
   return (
     <View>
-      <ScrollView>
+      <ScrollView style={{ height: "100%" }} alwaysBounceVertical={false}>
         <Logo />
         <LogoutBtn />
-        <MainBody total={total} />
-        <Text
-          style={{
-            marginLeft: 65,
-            marginBottom: 5,
-            marginTop: 15,
-            fontWeight: "bold",
-            fontSize: 19,
-          }}
-        >
-          최근 결제 내역
-        </Text>
-        <View style={styles.expenseItemStyle}>
-          {Array.isArray(expenseData) && expenseData.length !== 0 ? (
-            expenseData
-              .slice(0, 10)
-              .map((item, index) => (
-                <ExpenseItem key={index} expenseData={item} />
-              ))
-          ) : (
-            <View style={{ alignItems: "center", margin: 50 }}>
-              <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-                최근 결제내역 없습니다.
-              </Text>
+        {loading == true ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
+          <>
+            <MainBody total={total} />
+            <Text
+              style={{
+                marginLeft: 65,
+                marginBottom: 5,
+                marginTop: 15,
+                fontWeight: "bold",
+                fontSize: 19,
+              }}
+            >
+              최근 결제 내역
+            </Text>
+            <View style={styles.expenseItemStyle}>
+              {Array.isArray(expenseData) && expenseData.length !== 0 ? (
+                expenseData
+                  .slice(0, 10)
+                  .map((item, index) => (
+                    <ExpenseItem key={index} expenseData={item} />
+                  ))
+              ) : (
+                <View style={{ alignItems: "center", margin: 50 }}>
+                  <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+                    최근 결제내역 없습니다.
+                  </Text>
+                </View>
+              )}
             </View>
-          )}
-        </View>
+          </>
+        )}
       </ScrollView>
     </View>
   );

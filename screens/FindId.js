@@ -6,7 +6,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { changePwd, emailCheck, findId, sendEmail } from "../util/http";
+import { emailCheck, findId, sendEmail } from "../util/http";
 import { useState } from "react";
 import { GlobalStyles } from "../constants/styles";
 import { Button } from "react-native-paper";
@@ -95,7 +95,7 @@ const FindId = () => {
       <ScrollView>
         <View style={styles.changePwdWrap}>
           <View style={{ marginLeft: 5 }}>
-            <Text style={styles.inputStyle}>아이디 찾기</Text>
+            <Text style={styles.subTitleStyle}>아이디 찾기</Text>
           </View>
           <View>
             <View style={styles.inputWrap}>
@@ -187,13 +187,17 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: "gray",
     borderRadius: 25,
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
   findPwdInfoWrap: {
     width: "100%",
@@ -226,6 +230,12 @@ const styles = StyleSheet.create({
     width: 300,
     fontSize: 18,
     height: 40,
+  },
+  subTitleStyle: {
+    width: 300,
+    fontSize: 20,
+    height: 40,
+    fontWeight: "bold",
   },
   buttonStyle: {
     borderRadius: 10,

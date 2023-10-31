@@ -7,15 +7,17 @@ import {
   View,
 } from "react-native";
 import { changePwd, emailCheck, sendEmail } from "../util/http";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { GlobalStyles } from "../constants/styles";
 import { Button } from "react-native-paper";
 import Logo from "../components/Logo";
 import BackBtn from "../components/BackBtn";
 import { useNavigation } from "@react-navigation/native";
+import { UserContext } from "../store/user-context";
 
 const ChangePwd = () => {
-  const [userId, setUserId] = useState("");
+  const userCtx = useContext(UserContext);
+  const [userId, setUserId] = useState(userCtx.user.id);
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [certification, setCertification] = useState(false);
@@ -42,7 +44,7 @@ const ChangePwd = () => {
   };
 
   const clearSet = () => {
-    setUserId("");
+    setUserId(useContext.user.id);
     setEmail("");
     setCode("");
     setPwd("");
@@ -93,8 +95,9 @@ const ChangePwd = () => {
     }
   };
 
-  const goLogin = () => {
-    navigation.navigate("로그인");
+  const goBack = () => {
+    navigation.goBack();
+    clearSet();
   };
   return (
     <View
@@ -106,19 +109,23 @@ const ChangePwd = () => {
     >
       <Logo />
       <BackBtn />
-      <ScrollView>
+      <ScrollView alwaysBounceVertical={false}>
         <View style={styles.changePwdWrap}>
           <View style={{ marginLeft: 5 }}>
-            <Text style={styles.inputStyle}>비밀번호 변경</Text>
+            <Text style={styles.subTitleStyle}>비밀번호 변경</Text>
           </View>
           <View>
             <View style={styles.inputWrap}>
-              <TextInput
-                placeholder={"ID"}
-                style={{ width: 300, fontSize: 18 }}
-                value={userId}
-                onChangeText={onIdChange}
-              />
+              {userId == "" ? (
+                <TextInput
+                  placeholder={"ID"}
+                  style={{ width: 300, fontSize: 18 }}
+                  value={userId}
+                  onChangeText={onIdChange}
+                />
+              ) : (
+                <Text style={{ width: 300, fontSize: 18 }}>{userId}</Text>
+              )}
             </View>
             <View style={styles.inputWrap}>
               <TextInput
@@ -180,7 +187,7 @@ const ChangePwd = () => {
                   style={styles.buttonVerifyColor}
                   backgroundColor={"#d22e2a"}
                 >
-                  <Button textColor="white" onPress={goLogin}>
+                  <Button textColor="white" onPress={goBack}>
                     취소
                   </Button>
                 </View>
@@ -212,13 +219,17 @@ const styles = StyleSheet.create({
     margin: 5,
     backgroundColor: GlobalStyles.color.primary500,
     borderRadius: 25,
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
   buttonVerifyColor: {
     width: 140,
@@ -226,13 +237,17 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: "gray",
     borderRadius: 25,
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
   findPwdInfoWrap: {
     width: "100%",
@@ -265,6 +280,12 @@ const styles = StyleSheet.create({
     width: 300,
     fontSize: 18,
     height: 40,
+  },
+  subTitleStyle: {
+    width: 300,
+    fontSize: 20,
+    height: 40,
+    fontWeight: "bold",
   },
   buttonStyle: {
     borderRadius: 10,

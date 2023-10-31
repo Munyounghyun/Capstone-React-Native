@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import { Button } from "react-native-paper";
 import LoginInput from "../components/Auth/LoginInput";

@@ -26,7 +26,7 @@ export default Logo;
 const styles = StyleSheet.create({
   logoTextColor: {
     fontSize: 30,
-    color: GlobalStyles.color.primary500,
+    color: "#3e04c3",
     fontWeight: "bold",
     fontStyle: "italic",
     marginLeft: 10,

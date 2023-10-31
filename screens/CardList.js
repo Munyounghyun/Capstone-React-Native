@@ -37,7 +37,7 @@ const CardList = () => {
     cardListCall();
   }, []);
   return (
-    <ScrollView>
+    <ScrollView alwaysBounceVertical={false}>
       <Logo />
       <LogoutBtn />
       <BackBtn />

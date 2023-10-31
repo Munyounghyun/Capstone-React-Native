@@ -1,4 +1,10 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import ExpenseItem from "../components/ExpensItem";
 import LogoutBtn from "../components/LogoutBtn";
 import Logo from "../components/Logo";
@@ -13,6 +19,8 @@ const ExpenseList = () => {
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
   const [expenseData, setExpenseData] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const onPrevMonth = () => {
     if (month > 1) {
@@ -32,6 +40,7 @@ const ExpenseList = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         const responseData = await expenseList({
@@ -42,16 +51,19 @@ const ExpenseList = () => {
         if (responseData.success == true) {
           //데이터 불러오기는 성공 수정 필요!!!
           setExpenseData(responseData.data);
+          setTotal(responseData.total);
         }
+        setLoading(true);
       } catch (e) {
         console.log(e);
+        setLoading(true);
       }
     };
     fetchData();
   }, [month]);
 
   return (
-    <ScrollView>
+    <ScrollView alwaysBounceVertical={false}>
       <Logo />
       <LogoutBtn />
       <View style={styles.headerWrap}>
@@ -71,21 +83,38 @@ const ExpenseList = () => {
           </View>
         </View>
       </View>
-      <View style={{ padding: 10 }}>
-        {Array.isArray(expenseData) && expenseData.length !== 0 ? (
-          expenseData.map((item, index) => (
-            <ExpenseItem key={index} expenseData={item} />
-          ))
-        ) : (
-          <View>
-            <Text
-              style={{ textAlign: "center", fontSize: 16, fontWeight: "700" }}
-            >
-              결제 내역이 없습니다.
-            </Text>
-          </View>
-        )}
-      </View>
+      {loading == false ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <View style={{ padding: 10 }}>
+          {expenseData.length == 0 ? (
+            <View>
+              <Text
+                style={{ textAlign: "center", fontSize: 16, fontWeight: "700" }}
+              >
+                결제 내역이 없습니다.
+              </Text>
+            </View>
+          ) : (
+            <>
+              <Text
+                style={{
+                  textAlign: "right",
+                  marginRight: 35,
+                  fontWeight: "700",
+                  fontSize: 16,
+                  marginBottom: 10,
+                }}
+              >
+                총 : {total}원
+              </Text>
+              {expenseData.map((item, index) => (
+                <ExpenseItem key={index} expenseData={item} />
+              ))}
+            </>
+          )}
+        </View>
+      )}
     </ScrollView>
   );
 };

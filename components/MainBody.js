@@ -1,14 +1,15 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import { useContext } from "react";
 import { UserContext } from "../store/user-context";
+import LinearGradient from "react-native-linear-gradient";
 
 const MainBody = ({ total }) => {
   const userCtx = useContext(UserContext);
 
   return (
     <View style={styles.bodyWrap}>
-      <Text style={styles.bodyFontStyle}>{userCtx.user.userName}</Text>
+      <Text style={styles.bodyFontStyle}>{userCtx.user.userName} 님</Text>
       <Text style={styles.bodyFontStyle}>
         {new Date().getFullYear()}년 {new Date().getMonth() + 1}월 사용내역
       </Text>
@@ -28,14 +29,18 @@ const styles = StyleSheet.create({
     padding: 35,
     borderRadius: 35,
     borderColor: "#ccc",
-    backgroundColor: GlobalStyles.color.gray500,
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
+    backgroundColor: "#5e60ce",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
   bodyFontStyle: {
     color: "white",

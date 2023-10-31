@@ -12,10 +12,8 @@ import ExpenseList from "./screens/ExpenseList";
 import { Ionicons } from "@expo/vector-icons";
 import CardList from "./screens/CardList";
 import CardRegist from "./screens/CardRegist";
-import UserContextProvider, { UserContext } from "./store/user-context";
-import { useContext } from "react";
+import UserContextProvider from "./store/user-context";
 
-//두 컴포넌트에 대한  액세스를 제공하는 객체
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 const BottomNav = () => {
@@ -56,7 +54,6 @@ const BottomNav = () => {
 };
 
 export default function App() {
-  const userCtx = useContext(UserContext);
   return (
     <>
       <StatusBar style="auto" />
@@ -80,10 +77,8 @@ export default function App() {
             <Stack.Screen name="로그인" component={Login} />
             <Stack.Screen name="아이디 찾기" component={FindId} />
             <Stack.Screen name="비밀번호 변경" component={ChangePwd} />
-            <Stack.Screen name="HiFive" component={BottomNav} />
-
             <Stack.Screen name="회원가입" component={Signup} />
-
+            <Stack.Screen name="HiFive" component={BottomNav} />
             <Stack.Screen name="사용자 정보" component={UserInfo} />
             <Stack.Screen name="카드 리스트" component={CardList} />
             <Stack.Screen name="카드 등록" component={CardRegist} />

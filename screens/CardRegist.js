@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   Alert,
+  KeyboardAvoidingView,
 } from "react-native";
 import { GlobalStyles } from "../constants/styles";
 import { Button } from "react-native-paper";
@@ -47,6 +48,15 @@ const CardRegist = () => {
   };
   const onPwdDigitChange = (e) => {
     setPwdDigit(e);
+  };
+
+  const clearSet = () => {
+    setCode("");
+    setCardNum("");
+    setBirth("");
+    setExp("");
+    setPwdDigit("");
+    setCertification(false);
   };
 
   //인증번호 전송
@@ -92,13 +102,8 @@ const CardRegist = () => {
       console.log(responseData);
       if (responseData.success === true) {
         Alert.alert("카드 등록 성공", "카드가 등록되었습니다.");
-        setCertification(false);
-        setCardNum("");
-        setBirth("");
-        setCode("");
-        setExp("");
-        setPwdDigit("");
         navigation.navigate("카드 리스트");
+        clearSet();
       } else {
         Alert.alert("카드 등록 실패", "카드 정보를 다시 입력해주세요");
       }
@@ -106,109 +111,116 @@ const CardRegist = () => {
   };
 
   const goUserInfo = () => {
-    navigation.navigate("사용자 정보");
+    navigation.goBack();
+    clearSet();
   };
   return (
     <View>
-      <ScrollView>
-        <Logo />
-        <LogoutBtn />
-        <BackBtn />
-        <View style={styles.cardRegistWrap}>
-          <View style={{ marginLeft: 65 }}>
-            <Text style={{ fontSize: 18, fontWeight: "bold" }}>카드 등록</Text>
-          </View>
-          <View style={GlobalStyles.inputView}>
-            <TextInput
-              style={GlobalStyles.inputStyle}
-              placeholder={"이메일 인증번호 입력"}
-              value={code}
-              onChangeText={onCodeChange}
-            />
-          </View>
-          <View style={styles.buttonWrap}>
-            <View style={styles.buttonThrowColor}>
-              <Button textColor="white" onPress={sendEmailCode}>
-                인증번호 전송
-              </Button>
-            </View>
-            <View style={styles.buttonVerifyColor}>
-              <Button textColor="white" onPress={checkCode}>
-                인증
-              </Button>
-            </View>
-          </View>
-          {certification && (
-            <>
-              <Text
-                style={{
-                  marginLeft: 65,
-                  marginTop: 20,
-                  marginBottom: -20,
-                  fontSize: 20,
-                  fontWeight: "bold",
-                }}
-              >
-                카드 정보 입력
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <ScrollView>
+          <Logo />
+          <LogoutBtn />
+          <BackBtn />
+          <View style={styles.cardRegistWrap}>
+            <View style={{ marginLeft: 65 }}>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                카드 등록
               </Text>
-              <View style={styles.cardInfoWrap}>
-                <View style={styles.cardInfoInnerWrap}>
-                  <View style={GlobalStyles.inputView}>
-                    <TextInput
-                      style={GlobalStyles.smallInputStyle}
-                      placeholder={"카드 번호 입력"}
-                      secureTextEntry={true}
-                      value={cardNum}
-                      onChangeText={onCardNumChange}
-                    />
-                  </View>
-                  <View style={GlobalStyles.inputView}>
-                    <TextInput
-                      style={GlobalStyles.smallInputStyle}
-                      placeholder={"생년월일 입력 ex)001010"}
-                      value={birth}
-                      onChangeText={onBirthChange}
-                    />
-                  </View>
-                  <View style={GlobalStyles.inputView}>
-                    <TextInput
-                      style={GlobalStyles.smallInputStyle}
-                      placeholder={"유효기간 입력 ex)202301"}
-                      value={exp}
-                      onChangeText={onExpChange}
-                    />
-                  </View>
-                  <View style={GlobalStyles.inputView}>
-                    <TextInput
-                      style={GlobalStyles.smallInputStyle}
-                      placeholder={"카드 비밀번호 앞 2자리"}
-                      secureTextEntry={true}
-                      value={pwdDigit}
-                      onChangeText={onPwdDigitChange}
-                    />
-                  </View>
-
-                  <View style={styles.buttonWrap}>
-                    <View style={styles.buttonThrowColor}>
-                      <Button textColor="white" onPress={cardRegistRequest}>
-                        카드 등록
-                      </Button>
+            </View>
+            <View style={GlobalStyles.inputView}>
+              <TextInput
+                style={GlobalStyles.inputStyle}
+                placeholder={"이메일 인증번호 입력"}
+                value={code}
+                onChangeText={onCodeChange}
+              />
+            </View>
+            <View style={styles.buttonWrap}>
+              <View style={styles.buttonThrowColor}>
+                <Button textColor="white" onPress={sendEmailCode}>
+                  인증번호 전송
+                </Button>
+              </View>
+              <View style={styles.buttonVerifyColor}>
+                <Button textColor="white" onPress={checkCode}>
+                  인증
+                </Button>
+              </View>
+            </View>
+            {certification && (
+              <>
+                <Text
+                  style={{
+                    marginLeft: 65,
+                    marginTop: 20,
+                    marginBottom: -10,
+                    fontSize: 20,
+                    fontWeight: "bold",
+                  }}
+                >
+                  카드 정보 입력
+                </Text>
+                <View style={styles.cardInfoWrap}>
+                  <View style={styles.cardInfoInnerWrap}>
+                    <View style={GlobalStyles.inputView}>
+                      <TextInput
+                        style={GlobalStyles.smallInputStyle}
+                        placeholder={"카드 번호 입력"}
+                        secureTextEntry={true}
+                        value={cardNum}
+                        onChangeText={onCardNumChange}
+                      />
                     </View>
-                    <View
-                      style={styles.buttonVerifyColor}
-                      backgroundColor={"#d22e2a"}
-                    >
-                      <Button textColor="white" onPress={goUserInfo}>
-                        취소
-                      </Button>
+                    <View style={GlobalStyles.inputView}>
+                      <TextInput
+                        style={GlobalStyles.smallInputStyle}
+                        placeholder={"생년월일 입력 ex)001010"}
+                        value={birth}
+                        onChangeText={onBirthChange}
+                      />
+                    </View>
+                    <View style={GlobalStyles.inputView}>
+                      <TextInput
+                        style={GlobalStyles.smallInputStyle}
+                        placeholder={"유효기간 입력 ex)202301"}
+                        value={exp}
+                        onChangeText={onExpChange}
+                      />
+                    </View>
+                    <View style={GlobalStyles.inputView}>
+                      <TextInput
+                        style={GlobalStyles.smallInputStyle}
+                        placeholder={"카드 비밀번호 앞 2자리"}
+                        secureTextEntry={true}
+                        value={pwdDigit}
+                        onChangeText={onPwdDigitChange}
+                      />
+                    </View>
+
+                    <View style={styles.buttonWrap}>
+                      <View style={styles.buttonThrowColor}>
+                        <Button textColor="white" onPress={cardRegistRequest}>
+                          카드 등록
+                        </Button>
+                      </View>
+                      <View
+                        style={styles.buttonVerifyColor}
+                        backgroundColor={"#d22e2a"}
+                      >
+                        <Button textColor="white" onPress={goUserInfo}>
+                          취소
+                        </Button>
+                      </View>
                     </View>
                   </View>
                 </View>
-              </View>
-            </>
-          )}
-        </View>
-      </ScrollView>
+              </>
+            )}
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -231,13 +243,17 @@ const styles = StyleSheet.create({
     margin: 5,
     backgroundColor: GlobalStyles.color.primary500,
     borderRadius: 25,
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
   buttonVerifyColor: {
     width: 140,
@@ -245,13 +261,17 @@ const styles = StyleSheet.create({
     padding: 5,
     backgroundColor: "gray",
     borderRadius: 25,
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
   cardInfoWrap: {
     width: "100%",
@@ -261,6 +281,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   cardInfoInnerWrap: {
+    width: 340,
     borderWidth: 1,
     padding: 10,
     borderColor: "#ccc",

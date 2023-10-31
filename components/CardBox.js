@@ -113,31 +113,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     margin: 15,
-    padding: 20,
+    padding: 15,
     borderRadius: 35,
     borderColor: "#ccc",
-    backgroundColor: GlobalStyles.color.gray500,
-    shadowColor: "rgb(50, 50, 50)",
-    shadowRadius: 5,
-    shadowOpacity: 0.5,
-    shadowOffset: {
-      height: 2,
-      width: 2,
-    },
+    backgroundColor: "#7776bc",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 4, height: 4 },
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
   cardText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 14,
+    fontWeight: "700",
   },
   cardStyle: {
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: "gray",
+    backgroundColor: "#8e9aaf",
   },
   mainCardStyle: {
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: GlobalStyles.color.primary500,
+    backgroundColor: "#4059ad",
   },
   deleteCardStyle: {
     width: 100,

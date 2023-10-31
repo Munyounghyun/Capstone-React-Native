@@ -2,7 +2,6 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-paper";
 import { UserContext } from "../store/user-context";
 const UserHeader = () => {
   const userCtx = useContext(UserContext);
