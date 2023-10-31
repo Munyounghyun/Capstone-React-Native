@@ -170,8 +170,9 @@ const ChangePwd = () => {
               </View>
               <View style={styles.inputWrap}>
                 <TextInput
-                  style={styles.inputStyle}
                   placeholder={"비밀번호 재입력"}
+                  secureTextEntry={true}
+                  style={styles.inputStyle}
                   value={rePwd}
                   onChangeText={onRePwdChange}
                 />
