@@ -148,6 +148,6 @@ const styles = StyleSheet.create({
     width: 100,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: "#d22e2a",
+    backgroundColor: "#ff595e",
   },
 });

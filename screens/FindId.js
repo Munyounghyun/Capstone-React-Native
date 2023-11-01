@@ -142,7 +142,7 @@ const FindId = () => {
                 아이디 찾기
               </Button>
             </View>
-            <View style={styles.buttonVerifyColor} backgroundColor={"#d22e2a"}>
+            <View style={styles.buttonVerifyColor} backgroundColor={"#ff595e"}>
               <Button textColor="white" onPress={goLogin}>
                 취소
               </Button>

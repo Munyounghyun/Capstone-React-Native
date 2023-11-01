@@ -186,7 +186,7 @@ const ChangePwd = () => {
                 </View>
                 <View
                   style={styles.buttonVerifyColor}
-                  backgroundColor={"#d22e2a"}
+                  backgroundColor={"#ff595e"}
                 >
                   <Button textColor="white" onPress={goBack}>
                     취소
