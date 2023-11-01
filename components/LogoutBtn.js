@@ -37,8 +37,11 @@ const LogoutBtn = () => {
         right: 30,
       }}
     >
-      <Button onPress={logout}>
-        <FontAwesomeIcon icon={faArrowRightFromBracket} />
+      <Button
+        icon={() => <FontAwesomeIcon icon={faArrowRightFromBracket} />}
+        onPress={logout}
+      >
+        {/* <FontAwesomeIcon icon={faArrowRightFromBracket} /> */}
       </Button>
     </View>
   );

@@ -17,9 +17,10 @@ const BackBtn = () => {
         left: 30,
       }}
     >
-      <Button onPress={goBack}>
-        <FontAwesomeIcon icon={faChevronLeft} />
-      </Button>
+      <Button
+        onPress={goBack}
+        icon={() => <FontAwesomeIcon icon={faChevronLeft} />}
+      ></Button>
     </View>
   );
 };

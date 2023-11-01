@@ -28,10 +28,12 @@
     "react-native-screens": "^3.26.0",
     "react-native-shadow": "^1.2.2",
     "react-native-shadow-2": "^7.0.8",
-    "react-native-svg": "^13.14.0"
+    "react-native-svg": "^13.14.0",
+    "react-native-vector-icons": "^10.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@types/react-native-vector-icons": "^6.4.16"
   },
   "private": true
 }

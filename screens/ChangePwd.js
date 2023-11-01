@@ -53,9 +53,15 @@ const ChangePwd = () => {
   };
 
   //인증번호 전송
-  const sendEmailCode = () => {
+  const sendEmailCode = async () => {
+    const responseData = await sendEmail({ email });
+
     sendEmail({ email });
-    Alert.alert("인증번호 전송", "해당 이메일로 인증 번호를 전송하였습니다.");
+    if (responseData.success === true && email !== "") {
+      Alert.alert("인증번호 전송", "해당 이메일로 인증 번호를 전송하였습니다.");
+    } else {
+      Alert.alert("인증번호 전송 실패", "인증번호 전송이 실패하였습니다.");
+    }
   };
 
   //인증번호 체크
