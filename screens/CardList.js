@@ -58,7 +58,7 @@ const CardList = () => {
           >
             카드 목록
           </Text>
-          <Button onPress={goAddCard}>
+          <Button onPress={()=>goAddCard()}>
             <Ionicons name="add" size={20} />
           </Button>
         </View>

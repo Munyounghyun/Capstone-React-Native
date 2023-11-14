@@ -122,7 +122,7 @@ const ChangePwd = () => {
           </View>
           <View>
             <View style={styles.inputWrap}>
-              {userId == "" ? (
+              {userCtx.user.id == "" ? (
                 <TextInput
                   placeholder={"ID"}
                   style={{ width: 300, fontSize: 18 }}
@@ -144,7 +144,7 @@ const ChangePwd = () => {
                 style={styles.buttonStyle}
                 backgroundColor={GlobalStyles.color.primary500}
               >
-                <Button textColor="white" onPress={sendEmailCode}>
+                <Button textColor="white" onPress={() => sendEmailCode()}>
                   {"메시지 보내기"}
                 </Button>
               </View>
@@ -157,7 +157,7 @@ const ChangePwd = () => {
                 onChangeText={onCodeChange}
               />
               <View style={styles.buttonStyle} backgroundColor={"gray"}>
-                <Button textColor="white" onPress={checkCode}>
+                <Button textColor="white" onPress={() => checkCode()}>
                   {"확인"}
                 </Button>
               </View>
@@ -186,7 +186,7 @@ const ChangePwd = () => {
 
               <View style={styles.buttonWrap}>
                 <View style={styles.buttonThrowColor}>
-                  <Button textColor="white" onPress={onChangePwd}>
+                  <Button textColor="white" onPress={() => onChangePwd()}>
                     비밀번호 변경
                   </Button>
                 </View>
@@ -194,7 +194,7 @@ const ChangePwd = () => {
                   style={styles.buttonVerifyColor}
                   backgroundColor={"#ff595e"}
                 >
-                  <Button textColor="white" onPress={goBack}>
+                  <Button textColor="white" onPress={() => goBack()}>
                     취소
                   </Button>
                 </View>

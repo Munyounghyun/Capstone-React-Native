@@ -69,7 +69,7 @@ const ExpenseList = () => {
       <View style={styles.headerWrap}>
         <View style={styles.headerStyle}>
           <View>
-            <Button textColor="black" onPress={onPrevMonth}>
+            <Button textColor="black" onPress={()=>onPrevMonth()}>
               {"◀"}
             </Button>
           </View>
@@ -77,7 +77,7 @@ const ExpenseList = () => {
             {year}년 {month}월
           </Text>
           <View>
-            <Button textColor="black" onPress={onNextMonth}>
+            <Button textColor="black" onPress={()=>onNextMonth()}>
               {"▶"}
             </Button>
           </View>

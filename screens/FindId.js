@@ -124,7 +124,7 @@ const FindId = () => {
                 style={styles.buttonStyle}
                 backgroundColor={GlobalStyles.color.primary500}
               >
-                <Button textColor="white" onPress={sendEmailCode}>
+                <Button textColor="white" onPress={()=>sendEmailCode()}>
                   {"메시지 보내기"}
                 </Button>
               </View>
@@ -137,7 +137,7 @@ const FindId = () => {
                 onChangeText={onCodeChange}
               />
               <View style={styles.buttonStyle} backgroundColor={"gray"}>
-                <Button textColor="white" onPress={checkCode}>
+                <Button textColor="white" onPress={()=>checkCode()}>
                   {"확인"}
                 </Button>
               </View>
@@ -145,12 +145,12 @@ const FindId = () => {
           </View>
           <View style={styles.buttonWrap}>
             <View style={styles.buttonThrowColor}>
-              <Button textColor="white" onPress={onFindId}>
+              <Button textColor="white" onPress={()=>onFindId()}>
                 아이디 찾기
               </Button>
             </View>
             <View style={styles.buttonVerifyColor} backgroundColor={"#ff595e"}>
-              <Button textColor="white" onPress={goLogin}>
+              <Button textColor="white" onPress={()=>goLogin()}>
                 취소
               </Button>
             </View>

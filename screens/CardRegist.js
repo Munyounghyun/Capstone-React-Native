@@ -145,12 +145,12 @@ const CardRegist = () => {
             </View>
             <View style={styles.buttonWrap}>
               <View style={styles.buttonThrowColor}>
-                <Button textColor="white" onPress={sendEmailCode}>
+                <Button textColor="white" onPress={()=>sendEmailCode()}>
                   인증번호 전송
                 </Button>
               </View>
               <View style={styles.buttonVerifyColor}>
-                <Button textColor="white" onPress={checkCode}>
+                <Button textColor="white" onPress={()=>checkCode()}>
                   인증
                 </Button>
               </View>
@@ -207,7 +207,7 @@ const CardRegist = () => {
 
                     <View style={styles.buttonWrap}>
                       <View style={styles.buttonThrowColor}>
-                        <Button textColor="white" onPress={cardRegistRequest}>
+                        <Button textColor="white" onPress={()=>cardRegistRequest()}>
                           카드 등록
                         </Button>
                       </View>
@@ -215,7 +215,7 @@ const CardRegist = () => {
                         style={styles.buttonVerifyColor}
                         backgroundColor={"#d22e2a"}
                       >
-                        <Button textColor="white" onPress={goUserInfo}>
+                        <Button textColor="white" onPress={()=>goUserInfo()}>
                           취소
                         </Button>
                       </View>

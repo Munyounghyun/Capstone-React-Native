@@ -18,12 +18,19 @@ const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 const BottomNav = () => {
   return (
-    <BottomTabs.Navigator initialRouteName="홈">
+    <BottomTabs.Navigator
+      initialRouteName="홈"
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: "#f8f8f8",
+        },
+      }}
+    >
       <BottomTabs.Screen
         name="이용내역"
         component={ExpenseList}
         options={{
-          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="list" size={size} color={color} />
           ),
@@ -33,7 +40,6 @@ const BottomNav = () => {
         name="홈"
         component={Main}
         options={{
-          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
@@ -43,7 +49,6 @@ const BottomNav = () => {
         name="사용자 정보"
         component={UserInfo}
         options={{
-          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="people" size={size} color={color} />
           ),
