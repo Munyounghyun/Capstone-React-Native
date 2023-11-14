@@ -44,7 +44,7 @@ const ChangePwd = () => {
   };
 
   const clearSet = () => {
-    setUserId(useContext.user.id);
+    setUserId(userCtx.user.id);
     setEmail("");
     setCode("");
     setPwd("");
@@ -56,7 +56,6 @@ const ChangePwd = () => {
   const sendEmailCode = async () => {
     const responseData = await sendEmail({ email });
 
-    sendEmail({ email });
     if (responseData.success === true && email !== "") {
       Alert.alert("인증번호 전송", "해당 이메일로 인증 번호를 전송하였습니다.");
     } else {
@@ -66,7 +65,6 @@ const ChangePwd = () => {
 
   //인증번호 체크
   const checkCode = async () => {
-    // const responsData = await loginRequest({ id, pwd });
     const responseData = await emailCheck({ email, auth_number: code });
     if (responseData.success === true) {
       Alert.alert("인증 성공", "인증 성공하였습니다.");

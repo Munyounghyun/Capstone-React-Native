@@ -11,37 +11,41 @@ import MainBody from "../components/MainBody";
 import ExpenseItem from "../components/ExpensItem";
 import LogoutBtn from "../components/LogoutBtn";
 import Logo from "../components/Logo";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../store/user-context";
 import { expenseList } from "../util/http";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Main = () => {
   const userCtx = useContext(UserContext);
   const [expenseData, setExpenseData] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    const fetchData = async () => {
-      try {
-        const responseData = await expenseList({
-          id: userCtx.user.id,
-          year: new Date().getFullYear(),
-          month: new Date().getMonth() + 1,
-        });
-        if (responseData.success == true) {
-          //데이터 불러오기는 성공 수정 필요!!!
-          setExpenseData(responseData.data);
-          setTotal(responseData.total);
-        }
-        setLoading(false);
-      } catch (e) {
-        console.log(e);
-        setLoading(false);
+
+  const fetchData = async () => {
+    try {
+      const responseData = await expenseList({
+        id: userCtx.user.id,
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1,
+      });
+      if (responseData.success == true) {
+        //데이터 불러오기는 성공 수정 필요!!!
+        setExpenseData(responseData.data);
+        setTotal(responseData.total);
       }
-    };
-    fetchData();
-  }, []);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  };
+  useFocusEffect(
+    useCallback(() => {
+      setLoading(true);
+      fetchData();
+    }, [])
+  );
 
   return (
     <View>

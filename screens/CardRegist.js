@@ -19,6 +19,7 @@ import BackBtn from "../components/BackBtn";
 
 const CardRegist = () => {
   const userCtx = useContext(UserContext);
+  const email = userCtx.user.email;
   const navigation = useNavigation();
   //인증번호
   const [code, setCode] = useState("");
@@ -63,7 +64,6 @@ const CardRegist = () => {
   const sendEmailCode = async () => {
     const responseData = await sendEmail({ email });
 
-    sendEmail({ email });
     if (responseData.success === true && email !== "") {
       Alert.alert("인증번호 전송", "해당 이메일로 인증 번호를 전송하였습니다.");
     } else {
@@ -75,7 +75,7 @@ const CardRegist = () => {
   const checkCode = async () => {
     // const responsData = await loginRequest({ id, pwd });
     const responseData = await emailCheck({
-      email: userCtx.user.email,
+      email,
       auth_number: code,
     });
     if (responseData.success === true) {
@@ -145,12 +145,12 @@ const CardRegist = () => {
             </View>
             <View style={styles.buttonWrap}>
               <View style={styles.buttonThrowColor}>
-                <Button textColor="white" onPress={()=>sendEmailCode()}>
+                <Button textColor="white" onPress={() => sendEmailCode()}>
                   인증번호 전송
                 </Button>
               </View>
               <View style={styles.buttonVerifyColor}>
-                <Button textColor="white" onPress={()=>checkCode()}>
+                <Button textColor="white" onPress={() => checkCode()}>
                   인증
                 </Button>
               </View>
@@ -207,7 +207,10 @@ const CardRegist = () => {
 
                     <View style={styles.buttonWrap}>
                       <View style={styles.buttonThrowColor}>
-                        <Button textColor="white" onPress={()=>cardRegistRequest()}>
+                        <Button
+                          textColor="white"
+                          onPress={() => cardRegistRequest()}
+                        >
                           카드 등록
                         </Button>
                       </View>
@@ -215,7 +218,7 @@ const CardRegist = () => {
                         style={styles.buttonVerifyColor}
                         backgroundColor={"#d22e2a"}
                       >
-                        <Button textColor="white" onPress={()=>goUserInfo()}>
+                        <Button textColor="white" onPress={() => goUserInfo()}>
                           취소
                         </Button>
                       </View>

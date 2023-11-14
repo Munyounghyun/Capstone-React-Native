@@ -2,12 +2,12 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import LogoutBtn from "../components/LogoutBtn";
 import Logo from "../components/Logo";
 import CardBox from "../components/CardBox";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../store/user-context";
 import { cardList } from "../util/http";
 import { Ionicons } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import BackBtn from "../components/BackBtn";
 
 const CardList = () => {
@@ -33,7 +33,7 @@ const CardList = () => {
     }
   };
 
-  useEffect(() => {
+  useFocusEffect(() => {
     cardListCall();
   }, []);
   return (
@@ -58,7 +58,7 @@ const CardList = () => {
           >
             카드 목록
           </Text>
-          <Button onPress={()=>goAddCard()}>
+          <Button onPress={() => goAddCard()}>
             <Ionicons name="add" size={20} />
           </Button>
         </View>

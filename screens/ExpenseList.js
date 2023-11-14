@@ -38,27 +38,27 @@ const ExpenseList = () => {
       setYear(year + 1); // 12월에서 다음 달로 넘어갈 때 년도 증가
     }
   };
+  const fetchData = async () => {
+    try {
+      const responseData = await expenseList({
+        id: userCtx.user.id,
+        year: year,
+        month: month,
+      });
+      if (responseData.success == true) {
+        //데이터 불러오기는 성공 수정 필요!!!
+        setExpenseData(responseData.data);
+        setTotal(responseData.total);
+      }
+      setLoading(true);
+    } catch (e) {
+      console.log(e);
+      setLoading(true);
+    }
+  };
 
   useEffect(() => {
-    setLoading(true);
-    const fetchData = async () => {
-      try {
-        const responseData = await expenseList({
-          id: userCtx.user.id,
-          year: year,
-          month: month,
-        });
-        if (responseData.success == true) {
-          //데이터 불러오기는 성공 수정 필요!!!
-          setExpenseData(responseData.data);
-          setTotal(responseData.total);
-        }
-        setLoading(true);
-      } catch (e) {
-        console.log(e);
-        setLoading(true);
-      }
-    };
+    setLoading(false);
     fetchData();
   }, [month]);
 
@@ -69,7 +69,7 @@ const ExpenseList = () => {
       <View style={styles.headerWrap}>
         <View style={styles.headerStyle}>
           <View>
-            <Button textColor="black" onPress={()=>onPrevMonth()}>
+            <Button textColor="black" onPress={() => onPrevMonth()}>
               {"◀"}
             </Button>
           </View>
@@ -77,7 +77,7 @@ const ExpenseList = () => {
             {year}년 {month}월
           </Text>
           <View>
-            <Button textColor="black" onPress={()=>onNextMonth()}>
+            <Button textColor="black" onPress={() => onNextMonth()}>
               {"▶"}
             </Button>
           </View>
