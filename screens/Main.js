@@ -70,8 +70,9 @@ const Main = () => {
             </Text>
             <View style={styles.expenseItemStyle}>
               {Array.isArray(expenseData) && expenseData.length !== 0 ? (
-                expenseData
-                  .slice(0, 10)
+                [...expenseData] // 배열의 복사본을 생성
+                  .reverse() // 복사본을 뒤집음
+                  .slice(0, 10) // 뒤집힌 배열의 첫 10개 요소를 선택
                   .map((item, index) => (
                     <ExpenseItem key={index} expenseData={item} />
                   ))
