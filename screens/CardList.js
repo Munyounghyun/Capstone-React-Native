@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import LogoutBtn from "../components/LogoutBtn";
 import Logo from "../components/Logo";
 import CardBox from "../components/CardBox";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../store/user-context";
 import { cardList } from "../util/http";
 import { Ionicons } from "@expo/vector-icons";
@@ -33,7 +33,7 @@ const CardList = () => {
     }
   };
 
-  useFocusEffect(() => {
+  useEffect(() => {
     cardListCall();
   }, []);
   return (
